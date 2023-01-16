@@ -11,7 +11,7 @@
 /**
  * Directory entry
  */
-pthread_mutex_t trinco2;
+//pthread_mutex_t trinco2;
 
 typedef struct {
     char d_name[MAX_FILE_NAME];
