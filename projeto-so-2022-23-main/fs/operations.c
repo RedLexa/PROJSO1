@@ -300,6 +300,7 @@ ssize_t tfs_read(int fhandle, void *buffer, size_t len) {
 }
 
 int tfs_unlink(char const *target) {
+    int a;
     if (!valid_pathname(target)) {
         return -1;
     }
@@ -310,6 +311,10 @@ int tfs_unlink(char const *target) {
     if(inum >=0){
         inode_t *inode = inode_get(inum);
         if(inode->i_node_type == T_SYMLINK){
+            a = tfs_unlink(inode->sympath);
+            if(a == -1){
+                return -1;
+            }
             clear_dir_entry(root_dir_inode,target + 1);
             inode_delete(inum);
             return 0;
